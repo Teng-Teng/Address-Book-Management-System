@@ -20,6 +20,7 @@ struct AddressBook
     int size;
 };
 
+// add a contact
 void addPerson(struct AddressBook *addrBookP) {
     // check if the address book is full
     if (addrBookP->size == MAX) {
@@ -84,6 +85,25 @@ void addPerson(struct AddressBook *addrBookP) {
 
 }
 
+// show all contacts
+void showPerson(struct AddressBook *addrBookP) {
+    if (addrBookP->size == 0)
+        cout << "There is no contact in the address book!" << endl;
+    else {
+        for (int i = 0; i < addrBookP->size; i++) {
+            cout << "Name:  " << addrBookP->personArray[i].name << "\t";
+            cout << "Gender:  " << (addrBookP->personArray[i].sex == 1 ? "male" : "female") << "\t   ";
+            cout << "Age:  " << addrBookP->personArray[i].age << "\t";
+            cout << "Phone number:  " << addrBookP->personArray[i].phone << "\t";
+            cout << "Address:  " << addrBookP->personArray[i].address << endl;
+        }
+    }
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+}
+
 // menu interface
 void showMenu() {
     cout << "**********************************" << endl;
@@ -97,7 +117,6 @@ void showMenu() {
     cout << "**********************************" << endl;
 }
 
-
 int main() {
 
     struct AddressBook addrBook;
@@ -108,6 +127,8 @@ int main() {
     while (true) {
         showMenu();
 
+        cout << "Welcome to the address book!" << endl;
+
         cin >> select;
 
         switch(select) {
@@ -115,6 +136,7 @@ int main() {
                 addPerson(&addrBook);
                 break;
             case 2:
+                showPerson(&addrBook);
                 break;
             case 3:
                 break;
@@ -132,6 +154,10 @@ int main() {
                 break;
 
             default:
+                cout << "Please enter the correct option!" << endl;
+                cout << "Press enter to continue..." << endl;
+                system("read");
+                system("clear");  // clear the screen
                 break;
         }
     }
