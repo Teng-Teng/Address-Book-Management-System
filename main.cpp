@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 // menu interface
@@ -12,14 +13,45 @@ void showMenu() {
     cout << "*****  6. Clear contact      *****" << endl;
     cout << "*****  0. Exit address book  *****" << endl;
     cout << "**********************************" << endl;
-
 }
 
 
 int main() {
-    showMenu();
 
-    cout << "Press any key to continue" << endl;
-    getchar();
+    int select = 0;
+
+    while (true) {
+        showMenu();
+
+        cin >> select;
+
+        switch(select) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 0:
+                cout << "Goodbye!" << endl;
+                cout << "Press enter to continue..." << endl;
+                system("read");
+                return 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+
     return 0;
 }
