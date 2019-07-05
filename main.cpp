@@ -20,6 +20,70 @@ struct AddressBook
     int size;
 };
 
+void addPerson(struct AddressBook *addrBookP) {
+    // check if the address book is full
+    if (addrBookP->size == MAX) {
+        cout << "The address book is full, can't add a new contact!" << endl;
+        return;
+    }
+
+    // enter the contact name
+    cout << "Please enter the contact name:  " << endl;
+    string name;
+    cin >> name;
+    addrBookP->personArray[addrBookP->size].name = name;
+
+    // enter the contact gender
+    cout << "Please enter the gender:  " << endl;
+    cout << "1 --- male"   << endl;
+    cout << "2 --- female" << endl;
+    int sex = 0;
+
+    while(true) {
+        cin >> sex;
+        if (sex == 1 || sex == 2) {
+            addrBookP->personArray[addrBookP->size].sex = sex;
+            break;
+        }
+        cout << "Please enter the correct gender!" << endl;
+    }
+
+    // enter the contact age
+    cout << "Please enter the age:  " << endl;
+    int age = 0;
+
+    while(true) {
+        cin >> age;
+        if (age > 0 && age < 130) {
+            addrBookP->personArray[addrBookP->size].age = age;
+            break;
+        }
+        cout << "Please enter the correct age!"  << endl;
+    }
+
+    // enter the phone number
+    cout << "Please enter the phone number:  " << endl;
+    string phone;
+    cin >> phone;
+    addrBookP->personArray[addrBookP->size].phone = phone;
+
+    // enter the address
+    cout << "Please enter the address:  " << endl;
+    string address;
+    cin >> address;
+    addrBookP->personArray[addrBookP->size].address = address;
+
+    // update the size for the address book
+    addrBookP->size++;
+
+    cout << "Add contact successfully!" << endl;
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+
+}
+
 // menu interface
 void showMenu() {
     cout << "**********************************" << endl;
@@ -36,6 +100,9 @@ void showMenu() {
 
 int main() {
 
+    struct AddressBook addrBook;
+    addrBook.size = 0;
+
     int select = 0;
 
     while (true) {
@@ -45,6 +112,7 @@ int main() {
 
         switch(select) {
             case 1:
+                addPerson(&addrBook);
                 break;
             case 2:
                 break;
