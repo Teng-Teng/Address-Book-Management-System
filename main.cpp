@@ -1,6 +1,24 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
+#define MAX 1000
+
+struct Person
+{
+    string name;
+    int sex;  // male 1 female 2
+    int age;
+    string phone;
+    string address;
+
+};
+
+struct AddressBook
+{
+    struct Person personArray[MAX];
+    int size;
+};
 
 // menu interface
 void showMenu() {
