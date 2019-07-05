@@ -104,6 +104,39 @@ void showPerson(struct AddressBook *addrBookP) {
     system("clear");  // clear the screen
 }
 
+// check whether the contact exists
+int isExist(struct AddressBook *addrBookP, string name) {
+    for (int i = 0; i < addrBookP->size; i++) {
+        if (addrBookP->personArray[i].name == name)
+            return i;
+    }
+    return -1;
+}
+
+// delete a contact
+void deletePerson(struct AddressBook *addrBookP) {
+    cout << "Please enter the contact name you want to delete:  " << endl;
+
+    string name;
+    cin >> name;
+
+    int ret = isExist(addrBookP, name);
+
+    if (ret != -1) {
+        for (int i = ret; i < addrBookP->size - 1; i++) {
+            addrBookP->personArray[i] = addrBookP->personArray[i + 1];
+        }
+        addrBookP->size--;
+        cout << "Delete contact successfully!" << endl;
+    } else {
+        cout << "Can't find this contact" << endl;
+    }
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+}
+
 // menu interface
 void showMenu() {
     cout << "**********************************" << endl;
@@ -135,23 +168,29 @@ int main() {
             case 1:
                 addPerson(&addrBook);
                 break;
+
             case 2:
                 showPerson(&addrBook);
                 break;
+
             case 3:
+                deletePerson(&addrBook);
                 break;
+
             case 4:
                 break;
+
             case 5:
                 break;
+
             case 6:
                 break;
+
             case 0:
                 cout << "Goodbye!" << endl;
                 cout << "Press enter to continue..." << endl;
                 system("read");
                 return 0;
-                break;
 
             default:
                 cout << "Please enter the correct option!" << endl;
