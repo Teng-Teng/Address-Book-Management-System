@@ -137,6 +137,101 @@ void deletePerson(struct AddressBook *addrBookP) {
     system("clear");  // clear the screen
 }
 
+// find a contact
+void findPerson(struct AddressBook *addrBookP) {
+    cout << "Please enter the name of the person you want to find:  " << endl;
+
+    string name;
+    cin >> name;
+
+    int ret = isExist(addrBookP, name);
+
+    if (ret != -1) {
+        cout << "Name:  " << addrBookP->personArray[ret].name << "\t";
+        cout << "Gender:  " << addrBookP->personArray[ret].sex << "\t";
+        cout << "Age:  " << addrBookP->personArray[ret].age << "\t";
+        cout << "Phone number:  " << addrBookP->personArray[ret].phone << "\t";
+        cout << "Address:  " << addrBookP->personArray[ret].address << endl;
+    } else
+        cout << "Can't find this person!" << endl;
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+}
+
+// modify the contact information
+void modifyPerson(struct AddressBook *addrBookP) {
+    cout << "Please enter the contact name you want to modify" << endl;
+    string name;
+    cin >> name;
+
+    int ret = isExist(addrBookP, name);
+
+    if (ret != -1) {
+        // modify name
+        cout << "Please enter the name:  " << endl;
+        string name;
+        cin >> name;
+        addrBookP->personArray[ret].name = name;
+
+        //modify gender
+        cout << "Please enter the gender:  " << endl;
+        cout << "1 --- male" << endl;
+        cout << "2 --- female" << endl;
+
+        int sex = 0;
+
+        while(true) {
+            cin >> sex;
+            if (sex == 1 || sex == 2) {
+                addrBookP->personArray[ret].sex = sex;
+                break;
+            }
+            cout << "Please enter the correct gender!" << endl;
+        }
+
+        // modify age
+        cout << "Please enter the age:  " << endl;
+        int age;
+        cin >> age;
+        addrBookP->personArray[ret].age = age;
+
+        // modify phone
+        cout << "Please enter the phone number:  " << endl;
+        string phone;
+        cin >> phone;
+        addrBookP->personArray[ret].phone = phone;
+
+        // modify address
+        cout << "Please enter the address:  " << endl;
+        string address;
+        cin >> address;
+        addrBookP->personArray[ret].address = address;
+
+        cout << "Modify successfully!" << endl;
+
+    } else {
+        cout << "Can't find this contact!" << endl;
+    }
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+
+}
+
+// clear all the contact
+void clearPerson(struct AddressBook *addrBookP) {
+    addrBookP->size = 0;
+
+    cout << "Address book has been emptied!" << endl;
+
+    cout << "Press enter to continue..." << endl;
+    system("read");
+    system("clear");  // clear the screen
+}
+
 // menu interface
 void showMenu() {
     cout << "**********************************" << endl;
@@ -178,12 +273,15 @@ int main() {
                 break;
 
             case 4:
+                findPerson(&addrBook);
                 break;
 
             case 5:
+                modifyPerson(&addrBook);
                 break;
 
             case 6:
+                clearPerson(&addrBook);
                 break;
 
             case 0:
